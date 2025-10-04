@@ -1,0 +1,12 @@
+packages:
+  - packages/*
+  - common/*
+
+catalog:
+  'three': 0.176.0
+  '@types/three': 0.176.0
+  'rollup-plugin-visualizer': ^6.0.1
+  'vite': ^6.2.5
+  'typescript': ^5.4.5
+
+autoInstallPeers: true

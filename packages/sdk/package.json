@@ -1,0 +1,48 @@
+{
+    "name": "@astral3d/engine",
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/astral3d.es.js",
+    "module": "./dist/astral3d.es.js",
+    "types": "./dist/types/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/astral3d.es.js",
+            "require": "./dist/astral3d.umd.js"
+        }
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build"
+    },
+    "dependencies": {
+        "3d-tiles-renderer": "^0.4.16",
+        "@babel/runtime": "7.27.0",
+        "@dxfom/mtext": "^0.3.2",
+        "camera-controls": "^2.9.0",
+        "js-base64": "^3.7.7",
+        "jszip": "^3.10.1",
+        "localforage": "^1.10.0",
+        "pako": "^2.1.0",
+        "signals": "^1.0.0",
+        "three": "catalog:",
+        "three-gpu-pathtracer": "^0.0.22",
+        "three-mesh-bvh": "^0.9.0",
+        "three-viewport-gizmo": "^2.0.2",
+        "web-ifc-three": "^0.0.126"
+    },
+    "devDependencies": {
+        "@astral3d/build-vite-plugins": "workspace:^",
+        "@types/node": "^18.11.9",
+        "@types/three": "catalog:",
+        "rollup-plugin-visualizer": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vite-plugin-dts": "4.0.0-beta.1"
+    }
+}

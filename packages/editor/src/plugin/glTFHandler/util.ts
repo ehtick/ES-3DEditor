@@ -1,0 +1,27 @@
+export const XMPContext: Record<string, string> = {
+	dc: 'http://purl.org/dc/elements/1.1/',
+	model3d: 'https://schema.khronos.org/model3d/xsd/1.0/',
+	rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+	xmp: 'http://ns.adobe.com/xap/1.0/',
+	xmpRights: 'http://ns.adobe.com/xap/1.0/rights/',
+};
+
+export function formatLong(x: number): string {
+	return x.toString();
+}
+
+export function formatBytes(bytes: number, decimals = 2): string {
+	if (bytes === 0) return '0 Bytes';
+
+	const k = 1000;
+	const dm = decimals < 0 ? 0 : decimals;
+	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+	const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+	return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+export function dim(str: string): string {
+	return `\x1b[2m${str}\x1b[0m`;
+}
