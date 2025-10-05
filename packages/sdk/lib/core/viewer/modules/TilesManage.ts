@@ -149,6 +149,8 @@ export class TilesManage {
     }
 
     update() {
+        // this.camera.updateMatrixWorld();
+
         for (const tiles of this.tilesMap.values()) {
             tiles.forEach(tile => tile.update());
         }

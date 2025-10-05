@@ -41,15 +41,16 @@ const searchText = inject('searchText') as Ref<string>;
 const previewInfo = inject('previewInfo') as any;
 const previewRef = inject('previewRef') as any;
 
-const activeSubCategory = ref('factory');
+const activeSubCategory = ref('building');
 const subCategories = ref([
-  {key: 'factory', name: cpt('extra.resource.billboard.Factory')},
+  {key: 'building', name: cpt('extra.resource.model.Building')},
   {key: 'other', name: cpt('extra.resource.model.Other')}
 ]);
 
 const allList = {
-  "factory": [
-    {key: "APetrochemicalPlant", image: "/static/images/resource/tiles/factory/APetrochemicalPlant.jpg", name: cpt('extra.resource.tiles.A petrochemical plant'), tileset: "/static/resource/tiles/factory/APetrochemicalPlant/tileset.json"},
+  "building": [
+    {key: "APetrochemicalPlant", image: "/static/images/resource/tiles/building/APetrochemicalPlant.jpg", name: cpt('extra.resource.tiles.A petrochemical plant'), tileset: "/static/resource/tiles/building/APetrochemicalPlant/tileset.json"},
+    {key: "BuildingGroup1", image: "/static/images/resource/tiles/building/buildingGroup1.jpg", name: cpt('extra.resource.tiles.Building group 1'), tileset: "https://tiles.arcgis.com/tiles/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Utrecht_3D_Tiles_Integrated_Mesh/3DTilesServer/tileset.json"},
   ],
   "other": [
     {key: "Dragon", image: "/static/images/resource/tiles/other/dragon.jpg", name: cpt('extra.resource.tiles.Dragon'), tileset: "/static/resource/tiles/other/dragon/tileset.json"},
@@ -67,9 +68,14 @@ function selectSubCategory(key: string) {
 
 // 预览
 async function handlePreview(item){
+  let url = item.tileset;
+  if(!url.startsWith('http')){
+    url = import.meta.env.VITE_GLOB_ORIGIN + item.tileset;
+  }
+
   previewInfo.name = (item.name as Ref<string>).value || item.name;
   previewInfo.type = "Tiles";
-  previewInfo.fileOrUrl = import.meta.env.VITE_GLOB_ORIGIN + item.tileset;
+  previewInfo.fileOrUrl = url;
   previewInfo.visible = true;
 
   // TODO： [20250927] 直接赋值previewInfo.fileOrUrl就会在预览组件中自动加载模型，运行2个月没问题后删除下面注释
@@ -93,9 +99,14 @@ async function handlePreview(item){
 
 //双击添加至场景..
 function addToScene(item, position?: Vector3) {
+  let url = item.tileset;
+  if(!url.startsWith('http')){
+    url = import.meta.env.VITE_GLOB_ORIGIN + item.tileset;
+  }
+
   const tiles = new Tiles({
     // 内置的3dTiles打包时需要存入完整地址方可通过sdk加载回来
-    url: import.meta.env.VITE_GLOB_ORIGIN + item.tileset,
+    url: url,
     name:item.name.value || item.name,
     reset2origin:true,
     debug:false,

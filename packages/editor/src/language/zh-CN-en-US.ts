@@ -1071,8 +1071,11 @@ export default {
                 Fireworks: '烟花',
             },
             tiles:{
+              /* 分类 */
+
               // 工厂
               'A petrochemical plant':"石油化工厂",
+              'Building group 1':"建筑群1",
               // 其他
               'Dragon':"龙",
             },

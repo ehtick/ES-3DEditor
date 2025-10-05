@@ -1,5 +1,5 @@
 import {TilesRenderer} from "3d-tiles-renderer";
-import {GLTFExtensionsPlugin,DebugTilesPlugin} from "3d-tiles-renderer/plugins";
+import {GLTFExtensionsPlugin,GLTFMeshFeaturesExtension,GLTFStructuralMetadataExtension,TilesFadePlugin,DebugTilesPlugin,UnloadTilesPlugin} from "3d-tiles-renderer/plugins";
 import Loader from "@/core/loader/Loader.ts";
 import {PerspectiveCamera, WebGLRenderer, Group, JSONMeta} from "three";
 import {deepAssign} from "@/utils";
@@ -14,7 +14,7 @@ export default class Tiles extends Group{
         reset2origin:true,
         debug:false,
         name:"Tiles",
-        errorTarget: 5,
+        errorTarget: 6,
         LRUCache:{
             maxSize: 4000,
             minSize: 3000,
@@ -68,10 +68,26 @@ export default class Tiles extends Group{
         tilesRenderer.registerPlugin(new GLTFExtensionsPlugin({
             dracoLoader: Loader.dracoLoader,
             ktxLoader: Loader.ktx2Loader,
+            plugins:[() => new GLTFMeshFeaturesExtension(),() => new GLTFStructuralMetadataExtension()]
         }));
         // Loader.createGLTFLoader(tilesRenderer.manager).then(loader => {
+        //     loader.register(() => new GLTFMeshFeaturesExtension());
+        //     loader.register(() => new GLTFStructuralMetadataExtension());
         //     tilesRenderer.manager.addHandler( /\.(gltf|glb)$/g, loader );
         // })
+
+        // 瓦片渐显隐
+        tilesRenderer.registerPlugin(new TilesFadePlugin());
+        // 从gpu卸载不可见瓦片数据，cpu上仍然存在
+        tilesRenderer.registerPlugin(new UnloadTilesPlugin());
+        if(this.options.debug){
+            // 注册调试插件
+            tilesRenderer.registerPlugin(new DebugTilesPlugin());
+            // 获取调试插件
+            const debugTilesPlugin = tilesRenderer.getPluginByName('DEBUG_TILES_PLUGIN') as DebugTilesPlugin;
+            // 显示包围盒的线框
+            debugTilesPlugin.displayBoxBounds = true;
+        }
 
         // 子级瓦片加载
         tilesRenderer.addEventListener('load-model', (e) => {
@@ -91,15 +107,6 @@ export default class Tiles extends Group{
         tilesRenderer.addEventListener("load-error", (e) => {
             console.error(`${tilesRenderer.group.name} load error:`, e);
         });
-
-        if(this.options.debug){
-            // 注册调试插件
-            tilesRenderer.registerPlugin(new DebugTilesPlugin());
-            // 获取调试插件
-            const debugTilesPlugin = tilesRenderer.getPluginByName('DEBUG_TILES_PLUGIN') as DebugTilesPlugin;
-            // 显示包围盒的线框
-            debugTilesPlugin.displayBoxBounds = true;
-        }
 
         return tilesRenderer;
     }
