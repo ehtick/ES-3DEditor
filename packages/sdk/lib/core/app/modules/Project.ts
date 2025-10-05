@@ -4,6 +4,7 @@
  * @date   2025/4/26 13:59
  * @description 当前项目相关信息
  */
+import * as THREE from 'three';
 import {getNestedProperty} from "@/utils";
 import type {App} from "../App";
 import {useRemoveSignal, useAddSignal, useDispatchSignal} from '@/hooks';
@@ -17,11 +18,11 @@ export const defaultProjectInfo = (): IAppProject.Info => ({
         // 渲染帧率上限,默认60
         fps: FPS_OPTIONS.HIGH,
         antialias: true,
-        toneMapping: 0, // NoToneMapping
+        toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1,
         shadow: {
             enabled: true,
-            type: 2, // PCF Soft
+            type: THREE.PCFSoftShadowMap,
         },
     },
     // 级联阴影映射
