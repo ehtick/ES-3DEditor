@@ -436,6 +436,8 @@ export class Signals {
         
         this.viewer.modules.viewHelper.update();
 
+        this.viewer.modules.tilesManage.resize();
+
         App.csm.updateFrustums();
         this.render();
     }

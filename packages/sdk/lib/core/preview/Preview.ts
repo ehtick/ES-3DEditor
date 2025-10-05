@@ -155,7 +155,7 @@ export default class Preview extends THREE.EventDispatcher<PreviewerEventMap>  {
             // 粒子系统
             particleSystem: new ParticleSystem(this),
             // 3d tiles管理器
-            tilesManage: new TilesManage(this.scene),
+            tilesManage: new TilesManage(this.scene,this.camera,this.renderer),
         }
     }
 

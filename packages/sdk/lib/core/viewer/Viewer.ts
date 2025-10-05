@@ -236,6 +236,17 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
 
         this.initEvent();
 
+        //监听视窗变化（节流）
+        let timer: NodeJS.Timeout | null = null;
+        const resizeObserver = new ResizeObserver(() => {
+            if (timer) return;
+            timer = setTimeout(() => {
+                useDispatchSignal("sceneResize", this.container.offsetWidth, this.container.offsetHeight);
+                timer = null;
+            }, 16)
+        });
+        resizeObserver.observe(this.container);
+
         useDispatchSignal("viewerInitCompleted", this);
     }
 
@@ -478,7 +489,7 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
             // 拖拽
             dragControl: new Drag(this),
             // 3d tiles管理器
-            tilesManage: new TilesManage(this.scene),
+            tilesManage: new TilesManage(this.scene,this.camera,this.renderer),
         }
 
         if (this.enableEdit) {
@@ -786,7 +797,7 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
     }
 
     /**
-     * 更新宽高比
+     * 更新相机宽高比
      */
     updateAspectRatio() {
         for (const uuid in App.cameras) {

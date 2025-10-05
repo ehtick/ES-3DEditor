@@ -6,12 +6,14 @@
  */
 import {TilesRenderer} from "3d-tiles-renderer";
 import type {PriorityQueue} from "3d-tiles-renderer";
-import {Mesh, Sphere, Vector3, Quaternion, Material, Scene} from 'three';
+import {Mesh, Sphere, Vector3, Quaternion, Material, Scene, PerspectiveCamera, WebGLRenderer} from 'three';
 import { MeshBVH,StaticGeometryGenerator,/*CENTER*/ } from 'three-mesh-bvh';
 import Tiles from "@/core/objects/Tile.ts";
 
 export class TilesManage {
     private scene:Scene;
+    private camera: PerspectiveCamera;
+    private renderer: WebGLRenderer;
 
     protected _tilesMergeMesh:Mesh | null = null;
 
@@ -34,8 +36,10 @@ export class TilesManage {
 
     needRender = false;
 
-    constructor(scene:Scene) {
+    constructor(scene:Scene,camera:PerspectiveCamera,renderer:WebGLRenderer) {
         this.scene = scene;
+        this.camera = camera;
+        this.renderer = renderer;
     }
 
     /**
@@ -134,6 +138,14 @@ export class TilesManage {
         }
 
         tiles.dispose();
+    }
+
+    resize(){
+        for (const tiles of this.tilesMap.values()) {
+            tiles.forEach(_tiles => {
+                _tiles.renderer.setResolutionFromRenderer(this.camera, this.renderer);
+            });
+        }
     }
 
     update() {

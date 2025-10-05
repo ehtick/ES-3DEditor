@@ -44,17 +44,6 @@ onMounted(async () => {
 
   await nextTick();
 
-  //监听视窗变化（节流）
-  let timer: NodeJS.Timeout | null = null;
-  const resizeObserver = new ResizeObserver(() => {
-    if (timer) return;
-    timer = setTimeout(() => {
-      Hooks.useDispatchSignal("sceneResize", viewportRef.value.offsetWidth, viewportRef.value.offsetHeight);
-      timer = null;
-    }, 16)
-  });
-  resizeObserver.observe(viewportRef.value);
-
   await init();
 });
 
