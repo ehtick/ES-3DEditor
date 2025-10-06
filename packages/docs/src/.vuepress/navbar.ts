@@ -8,12 +8,13 @@ export const navbar = defineNavbarConfig([
         link: '/notes/guide/介绍.md',
     },
     { text: 'SDK', link: '/notes/sdk/README.md', icon: 'carbon:api' },
-    { text: '推广中心', link: '/promotion/', icon: 'mdi:star-shooting-outline' },
+    { text: '推广中心', link: '/notes/promotion/README.md', icon: 'mdi:star-shooting-outline' },
+    { text: '商务合作', link: '/notes/cooperation/README.md', icon: 'carbon:partnership' },
     {
         text: '更多',
         icon: 'icon-park-outline:more-three',
         items: [
-            { text: '常见问题', link: '/questions/', icon: 'wpf:faq' },
+            { text: '常见问题', link: '/notes/more/questions.md', icon: 'wpf:faq' },
         ],
     },
     {

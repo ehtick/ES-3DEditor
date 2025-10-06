@@ -77,7 +77,7 @@ const guideNote = defineNoteConfig({
             items: [
                 {
                     text: '首页',
-                    collapsed: true,
+                    collapsed: false,
                     prefix: 'home',
                     items: [
                         '项目',
@@ -147,7 +147,7 @@ const guideNote = defineNoteConfig({
                 },
                 {
                     text: '预览页',
-                    collapsed: true,
+                    collapsed: false,
                     prefix: 'preview',
                     items: [
                         '界面',

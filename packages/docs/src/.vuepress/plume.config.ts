@@ -45,19 +45,10 @@ export default defineThemeConfig({
         // organization: '',
     },
 
+    // 导航栏配置
     navbar,
-    notes,
 
-    /**
-     * 公告板
-     * @see https://theme-plume.vuejs.press/guide/features/bulletin/
-     */
-    // bulletin: {
-    //   layout: 'top-right',
-    //   contentType: 'markdown',
-    //   title: '公告板标题',
-    //   content: '公告板内容',
-    // },
+    notes,
 
     /* 过渡动画 @see https://theme-plume.vuejs.press/config/basic/#transition */
     // transition: {
