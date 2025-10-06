@@ -119,11 +119,3 @@ import RepoCard from 'vuepress-theme-plume/features/RepoCard.vue'
 ```
 
 :::
-
-##### Tips:
-
--   `Node >= 23.0.0`;
-
-### 更新记录
-
-[Changelog](/notes/update/logs/)

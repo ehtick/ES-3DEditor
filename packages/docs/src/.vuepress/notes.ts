@@ -63,9 +63,12 @@ const guideNote = defineNoteConfig({
         {
             text: '快速入门',
             collapsed: false,
+            prefix: 'quick-start',
             icon: 'carbon:lightning',
             items: [
                 '介绍',
+                '安装',
+                '项目结构',
                 '部署'
             ]
         },

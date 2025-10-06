@@ -5,7 +5,7 @@ export const navbar = defineNavbarConfig([
     {
         text: '指南',
         icon: 'icon-park-outline:guide-board',
-        link: '/notes/guide/介绍.md',
+        link: '/notes/guide/quick-start/介绍.md',
     },
     { text: 'SDK', link: '/notes/sdk/README.md', icon: 'carbon:api' },
     { text: '推广中心', link: '/notes/promotion/README.md', icon: 'mdi:star-shooting-outline' },

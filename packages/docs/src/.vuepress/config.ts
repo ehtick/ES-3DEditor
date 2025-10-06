@@ -74,7 +74,14 @@ export default defineUserConfig({
         //   title: true,      // 是否生成标题
         // },
 
+        // 文章贡献者
+        contributors: {
+            mode: 'block',
+        },
+
         plugins: {
+            git: true,
+
             /**
              * Shiki 代码高亮
              * @see https://theme-plume.vuejs.press/config/plugins/code-highlight/
