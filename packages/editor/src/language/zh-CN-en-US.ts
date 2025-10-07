@@ -395,10 +395,6 @@ export default {
                 'Depth Write': '深度缓冲',
                 Wireframe: '线框',
             },
-            "Scene theme": "场景主题",
-            sceneTheme: {
-                'Blue tone': '蓝田日暖玉生烟',
-            },
             Animations: '动画',
             animation: {
                 Play: '播放',
@@ -542,6 +538,12 @@ export default {
             "Html panel":"Html面板",
             htmlPanel: {
                 Content: "内容"
+            },
+            "3D Tiles": "3D Tiles",
+            tiles: {
+                "Color mode": "颜色模式",
+                "Box bounds": "盒边界",
+                "Sphere bounds": "球形边界",
             }
         },
         assets: {
@@ -606,7 +608,8 @@ export default {
         Copy: "复制",
         Focus: '聚焦',
         Support: '支持',
-        Upload: '上传'
+        Upload: '上传',
+        Debug:"调试",
     },
     /* 提示 */
     prompt: {

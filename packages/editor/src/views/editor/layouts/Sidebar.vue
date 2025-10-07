@@ -17,7 +17,8 @@ import {
   Opacity,
   ImageReference,
   LocationHeart,
-  LocationCompany
+  LocationCompany,
+  ChoroplethMap
 } from "@vicons/carbon";
 
 import { t } from "@/language";
@@ -30,13 +31,13 @@ import SidebarHistory from "./sidebar/SidebarHistory.vue";
 import SidebarObject from "./sidebar/SidebarObject.vue";
 import SidebarGeometry from "./sidebar/SidebarGeometry.vue";
 import SidebarMaterial from "./sidebar/SidebarMaterial.vue";
-// import SidebarSceneTheme from "./sidebar/SidebarSceneTheme.vue";
 import SidebarAnimations from "./sidebar/SidebarAnimations.vue";
 import SidebarScript from "./sidebar/SidebarScript.vue";
 import SidebarDrawing from "./sidebar/SidebarDrawing.vue";
 import SidebarParticle from "./sidebar/SidebarParticle.vue";
 import SidebarBillboard from "./sidebar/SidebarBillboard.vue";
 import SidebarHtmlPanel from "./sidebar/SidebarHtmlPanel.vue";
+import Sidebar3DTiles from "./sidebar/Sidebar3DTiles.vue";
 
 const tabsInstRef = ref<TabsInst | null>(null);
 const tabs = ref<Array<any>>([]);
@@ -58,7 +59,6 @@ function setTabs(object){
       { name: "renderer", icon: { text: 'Renderer config',color:"#A9A9A9", component: markRaw(ImageReference) }, component: markRaw(SidebarRenderer) },
       { name: "effect", icon: { text: 'Post processing',color:"#A9A9A9", component: markRaw(MagicWandFilled) }, component: markRaw(SidebarEffect) },
       { name: "weather", icon: { text: 'Weather',color:"#A9A9A9", component: markRaw(CloudSnow) }, component: markRaw(SidebarWeather) },
-    // {name:"styles",icon:{text:'Scene theme',color:"#A9A9A9",component:markRaw(JoinOuter)},component:markRaw(SidebarSceneTheme)},
       { name: "history", icon: { text: 'History',color:"#A9A9A9", component: markRaw(ResultOld) }, component: markRaw(SidebarHistory) },
       { name: "drawing", icon: { text: 'Scene drawing',color:"#A9A9A9", component: markRaw(Image) }, component: markRaw(SidebarDrawing) },
   ];
@@ -91,6 +91,11 @@ function setTabs(object){
 
         current.value = 'htmlPanel';
         break;
+      case "TilesGroup":
+        object3DTabs.push({ name: '3DTiles', icon: { text: '3D Tiles',color:"#A9575F", component: markRaw(ChoroplethMap) }, component: markRaw(Sidebar3DTiles) })
+
+        current.value = '3DTiles';
+        break;
     }
   }
 
@@ -115,6 +120,13 @@ function setTabs(object){
   // 如果当前选中的对象不是HtmlPanel，但是侧边栏是HtmlPanel，则切换到对象侧边栏
   if (current.value === 'htmlPanel') {
     if (!Utils.isHtmlPanelObject(object)){
+      current.value = 'object';
+    }
+  }
+
+  // 如果当前选中的对象不是3DTiles，但是侧边栏是3DTiles，则切换到对象侧边栏
+  if (current.value === '3DTiles') {
+    if (!Utils.is3DTilesObject(object)){
       current.value = 'object';
     }
   }

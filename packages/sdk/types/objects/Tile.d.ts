@@ -6,8 +6,17 @@ declare namespace ITiles{
         name?:string;
         // 加载的3d tiles由于坐标原因，一般不在原点。此配置项为true则重置回原点
         reset2origin?:boolean;
-        // 是否开启tiles的debug模式
-        debug?:boolean;
+        // debug模式
+        debug?: {
+            // 是否启用
+            enabled:boolean;
+            // 渲染tile set时使用的颜色模式
+            colorMode: number;
+            // 显示包围盒的线框
+            displayBoxBounds: boolean;
+            // 显示包围球的线框
+            displaySphereBounds: boolean;
+        };
         // 目标屏幕空间误差（以像素为单位）
         errorTarget?: number;
         // LRU缓存:TilesRenderer 的实用程序类，用于跟踪当前使用的项目，以便渲染的项目不会被卸载

@@ -246,7 +246,6 @@ function addToScene(asset: IAssets.Item,positionOrObject?: Vector3 | Object3D) {
         url: url,
         name: asset.name,
         reset2origin:true,
-        debug:false,
       })
 
       if(positionOrObject && (positionOrObject as Vector3).isVector3 && tiles.options.reset2origin){

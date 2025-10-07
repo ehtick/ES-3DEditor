@@ -88,7 +88,6 @@ async function handlePreview(item){
   //     url:import.meta.env.VITE_GLOB_ORIGIN + item.tileset,
   //     name:previewInfo.name,
   //     reset2origin:true,
-  //     debug:false,
   //   })
   //
   //   previewer.addTiles(tiles).then(() => {
@@ -109,7 +108,6 @@ function addToScene(item, position?: Vector3) {
     url: url,
     name:item.name.value || item.name,
     reset2origin:true,
-    debug:false,
   })
 
   if (position && tiles.options.reset2origin) {

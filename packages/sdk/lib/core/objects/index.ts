@@ -1,4 +1,4 @@
 export {default as Billboard, getDefaultBillboardOptions} from "./Billboard";
 export {HtmlPanelConverter, HtmlPanel, HtmlSprite} from "./HtmlPanel";
 export {default as ParticleEmitter, getDefaultParticleConfig} from "./ParticleEmitter";
-export {default as Tiles} from "./Tile.ts";
+export {default as Tiles, getDefault3DTilesOptions} from "./Tile.ts";

@@ -125,7 +125,7 @@ function getScene(sceneInfo) {
 
         <n-layout-sider collapse-mode="transform" :collapsed-width="0" :width="siderWidth"
                         :native-scrollbar="false" show-trigger="bar" bordered>
-          <Layout.Sider/>
+          <Layout.Sidebar/>
         </n-layout-sider>
       </n-layout>
 

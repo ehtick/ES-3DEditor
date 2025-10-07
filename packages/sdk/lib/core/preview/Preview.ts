@@ -330,7 +330,6 @@ export default class Preview extends THREE.EventDispatcher<PreviewerEventMap>  {
                         url: fileOrUrl,
                         name: "AstralPreviewTiles",
                         reset2origin:true,
-                        debug:false,
                     })
                     this.addTiles(tiles).then(() => {
                         this.modules.controls.fitToBox(tiles,true);

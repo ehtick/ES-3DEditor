@@ -105,6 +105,13 @@ export function isHtmlPanelObject(object:Object3D | null){
 }
 
 /**
+ * 判断是否是3DTiles对象
+ */
+export function is3DTilesObject(object:Object3D | null){
+    return object && (object.isTilesGroup || object.type === "TilesGroup") && object.options;
+}
+
+/**
  * 获取场景/物体中的所有动画
  */
 export function getAnimations(object = App.scene) {

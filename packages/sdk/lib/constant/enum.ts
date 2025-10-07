@@ -40,3 +40,19 @@ export const ROAMING_CHARACTERS = {
     X_BOT: "X_Bot",
     Y_BOT: "Y_Bot",
 }
+
+/**
+ * 3DTiles DebugTilesPlugin ColorMode enum
+ */
+export const TILES_DEBUG_COLOR_MODE = {
+    "None": 0,
+    "Screen error": 1,
+    "Geometric error": 2,
+    "Distance": 3,
+    "Depth": 4,
+    "Relative depth": 5,
+    "Is leaf": 6,
+    "Random color": 7,
+    "Random node color": 8,
+    "Load order": 10,
+}
