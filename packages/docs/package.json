@@ -16,8 +16,8 @@
     "@vuepress/bundler-vite": "^2.0.0-rc.24",
     "http-server": "^14.1.1",
     "sass-embedded": "^1.85.0",
-    "typescript": "^5.7.3",
-    "vue": "^3.5.13",
+    "typescript": "catalog:",
+    "vue": "catalog:",
     "vuepress": "^2.0.0-rc.24",
     "vuepress-theme-plume": "^1.0.0-rc.164"
   }

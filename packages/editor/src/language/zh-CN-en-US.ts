@@ -910,7 +910,6 @@ export default {
                 "Sphere": '球体',
                 "Plane": '平面',
                 "Ring": '环',
-                "Polyhedron": '多面体',
                 "Tetrahedron": '四面体',
                 "Octahedron": '八面体',
                 "Dodecahedron": '十二面体',

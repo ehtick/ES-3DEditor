@@ -13,7 +13,9 @@
     "editor:tsc": "pnpm run -C packages/editor tsc",
     "editor:preview": "pnpm run -C packages/editor preview",
     "sdk:dev": "pnpm run -C packages/sdk dev",
-    "sdk:build": "pnpm run -C packages/sdk build"
+    "sdk:build": "pnpm run -C packages/sdk build",
+    "examples:dev": "pnpm run -C packages/examples dev",
+    "examples:build": "pnpm run -C packages/examples build"
   },
   "engines": {
     "node": ">=23.0.0"

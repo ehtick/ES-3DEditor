@@ -5,12 +5,12 @@ import vue from '@vitejs/plugin-vue';
 import Unocss from 'unocss/vite';
 // import cesium from 'vite-plugin-cesium';
 import mkcert from 'vite-plugin-mkcert';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 // 用于生成渐进式 Web 应用
 // import { VitePWA } from 'vite-plugin-pwa';
 // 自动按需引入Naive UI组件
-import Components from 'unplugin-vue-components/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import {wrapperEnv, createPlugins} from "@astral3d/build-vite-plugins";
 
 export default defineConfig(async ({mode, command}) => {
@@ -75,7 +75,7 @@ export default defineConfig(async ({mode, command}) => {
                         vue: ['vue', 'vue-router', 'pinia'],
                         i18n: ['vue-i18n'],
                         ui: ['naive-ui'],
-                        pinia: ['@astral3d/engine']
+                        astral3d: ['@astral3d/engine']
                     },
                 }
             }
