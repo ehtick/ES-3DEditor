@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import {ArrowLeft, ArrowRight} from '@vicons/carbon';
-
 </script>
 
 <template>
-  <n-carousel show-arrow mousewheel autoplay draggable effect="custom" :transition-props="{name: 'creative'}"
-              class="w-full h-25vh">
-    <img class="carousel-img" src="/static/images/carousel/Astral3DEditor.jpg">
-    <img class="carousel-img" src="/static/images/carousel/54.jpg">
+  <n-carousel show-arrow mousewheel autoplay class="w-full h-25vh">
+    <a href="https://www.rainyun.com/Astral3D_" target="_blank" class="w-full h-25vh inline-block">
+      <img class="carousel-img" src="/static/images/carousel/yuyun.jpg" />
+    </a>
+    <img class="carousel-img" src="/static/images/carousel/Astral3DEditor.jpg" />
+
 
     <template #arrow="{ prev, next }">
       <div class="custom-arrow">

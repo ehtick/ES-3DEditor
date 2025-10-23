@@ -16,6 +16,7 @@ import Loader from "@/core/loader/Loader";
 import App from "@/core/app/App";
 import Viewer from "@/core/viewer/Viewer";
 import MergeGeometriesWorker from "@/workers/mergeGeometries.worker.ts?worker&url";
+import {TYPED_ARRAYS} from "@/constant";
 
 let keyDownFn, keyUpFn;
 
@@ -30,8 +31,8 @@ class Roaming {
 
     private playerIsOnGround = true;
     private playerVelocity = new THREE.Vector3();
-    private gravity = -25; // 重力
-    private playerSpeed = 3; // 人物移动速度
+    private gravity = -20; // 重力
+    private playerSpeed = 2.2; // 人物移动速度
     playerInitPos = new THREE.Vector3(0, 0, 0); // 人物初始位置
     private firstPerson = true; // 是否第一人称
 
@@ -266,25 +267,48 @@ class Roaming {
         const generateMergedGeometry = () => {
             return new Promise((resolve,reject) => {
                 const cloneGeom = (me) => {
+                    const src = me.geometry;
                     // 检查对应属性是否存在
-                    if (!me.geometry.attributes || !me.geometry.attributes.position || me.geometry.attributes.position.isInterleavedBufferAttribute) return;
+                    if (!src || !src.attributes || !src.attributes.position) return;
 
-                    let geom = me.geometry.clone();
-                    geom.applyMatrix4(me.matrixWorld);
+                    // 先得到“无索引”的Geometry，toNonIndexed不会改变原Geometry
+                    const noIndexGeom = src.index ? src.toNonIndexed() : src.clone();
 
-                    // 合并仅保留position即可
-                    geom.attributes = {
-                        position: geom.toNonIndexed().attributes.position, // 取消position索引
+                    let posAttr = noIndexGeom.attributes.position;
+                    let outGeom = new THREE.BufferGeometry();
+
+                    // 交错缓冲区单独处理取出
+                    if (posAttr.isInterleavedBufferAttribute) {
+                        const { data, itemSize, count, normalized, offset } = posAttr; // data: InterleavedBuffer
+                        const { array, stride } = data; // stride: 步幅
+
+                        const out = new TYPED_ARRAYS[array.constructor.name || 'Float32Array'](count * itemSize);
+                        for (let i = 0; i < count; i++) {
+                            const base = i * stride + offset;
+                            // 假设 itemSize 通常为 3（x,y,z），但这里写通用拷贝
+                            for (let k = 0; k < itemSize; k++) {
+                                out[i * itemSize + k] = array[base + k];
+                            }
+                        }
+                        posAttr = new THREE.BufferAttribute(out, itemSize, normalized);
+                    } else {
+                        // 普通 BufferAttribute，直接克隆即可
+                        posAttr = posAttr.clone();
                     }
 
+                    // 仅保留position即可
+                    outGeom.setAttribute('position', posAttr);
                     // 手动纠正有些模型没有顶点索引的问题
-                    if (geom.index) geom.index = null;
+                    outGeom.index = null;
+
+                    // 应用世界矩阵
+                    outGeom.applyMatrix4(me.matrixWorld);
 
                     this.mergeWorker.postMessage({
                         type: "push",
-                        // geometry: geom
+                        // geometry: outGeom
                         // 合并在容差范围内的具有相似属性的顶点
-                        geometry: BufferGeometryUtils.mergeVertices(geom)
+                        geometry: BufferGeometryUtils.mergeVertices(outGeom)
                     })
                 }
 

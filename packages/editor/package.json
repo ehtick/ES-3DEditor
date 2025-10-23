@@ -40,8 +40,6 @@
     "@astral3d/build-vite-plugins": "workspace:^",
     "@types/cesium": "^1.70.4",
     "@types/three": "catalog:",
-    "@unocss/preset-attributify": "^0.46.5",
-    "@unocss/preset-icons": "^0.46.5",
     "@vitejs/plugin-vue":"catalog:",
     "dotenv": "^16.3.1",
     "less": "^4.3.0",
