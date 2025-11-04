@@ -3,8 +3,15 @@ export const ViewerOptions = (): IViewerSetting => ({
     container: undefined,
     // 场景背景及环境贴图
     hdr: undefined,
-    // 是否启用编辑模式
-    enableEdit: false,
+    // 编辑模式
+    edit: {
+        // 是否启用
+        enabled: false,
+        // 是否显示辅助线
+        helpers: true,
+        // 是否现实gizmo三坐标轴
+        gizmo: true
+    },
     // 是否启用脚本，自动运行脚本
     enableScript: true,
     // 请求相关
@@ -13,6 +20,7 @@ export const ViewerOptions = (): IViewerSetting => ({
     },
     // 场景内网格
     grid:{
+        // 是否启用
         enabled: true,
         // 网格颜色
         color: 0x999999,

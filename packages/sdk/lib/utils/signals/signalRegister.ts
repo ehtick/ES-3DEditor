@@ -78,7 +78,6 @@ const appSignals: SignalRegister = {
   scriptRemoved: new Signal(),
 
   showGridChanged: new Signal(),
-  showHelpersChanged: new Signal(),
   historyChanged: new Signal(),
 
   // 场景主相机变更

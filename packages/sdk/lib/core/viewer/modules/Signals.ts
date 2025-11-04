@@ -49,7 +49,6 @@ export class Signals {
 
         useAddSignal("sceneResize", this.sceneResize.bind(this));
         useAddSignal("showGridChanged", this.showGridChanged.bind(this));
-        useAddSignal("showHelpersChanged", this.showHelpersChanged.bind(this));
 
         useAddSignal("scriptAdded",this.scriptAdded.bind(this));
         useAddSignal("scriptRemoved",this.scriptRemoved.bind(this));
@@ -449,19 +448,6 @@ export class Signals {
     showGridChanged(showGrid:boolean){
         if(this.viewer.grid){
             this.viewer.grid.visible = showGrid;
-        }
-
-        this.render();
-    }
-
-    /**
-     * 显示场景辅助线等
-     * @param showHelpers
-     */
-    showHelpersChanged(showHelpers:boolean){
-        this.viewer.showSceneHelpers = showHelpers;
-        if(this.viewer.modules.transformControls){
-            this.viewer.modules.transformControls.enabled = showHelpers;
         }
 
         this.render();

@@ -1,3 +1,9 @@
+declare interface IViewerEdit {
+    enabled:boolean;
+    helpers: boolean;
+    gizmo:boolean;
+}
+
 declare interface IViewerGrid {
     enabled:boolean;
     color: number | string;
@@ -25,7 +31,7 @@ declare  interface IViewerRequest {
 declare interface IViewerSetting {
     container?: HTMLElement;
     hdr?: string;
-    enableEdit?: boolean;
+    edit?: IViewerEdit;
     enableScript?: boolean;
     request?:IViewerRequest;
     grid:IViewerGrid;

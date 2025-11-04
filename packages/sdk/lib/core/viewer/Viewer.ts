@@ -18,7 +18,7 @@ import {
     TilesManage,
 } from "./modules";
 import {ShaderMaterialManager} from "@/core/shaderMaterial/ShaderMaterialManager";
-import {deepAssign, getMousePosition, isEmptyObject, isNil,createDivContainer} from "@/utils";
+import {deepAssign, deepEqual, getMousePosition, isEmptyObject, isNil, createDivContainer} from "@/utils";
 import {useDispatchSignal} from "@/hooks";
 import {
     AddObjectCommand,
@@ -184,7 +184,6 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
     public pmremGenerator: THREE.PMREMGenerator | null = null;
     public pathtracer: ViewerPathTracer | undefined;
     public modules: ViewerModules;
-    public showSceneHelpers: boolean = true;
 
     public css2DRenderer: CSS2DRenderer = new CSS2DRenderer();
     public css3DRenderer: CSS3DRenderer = new CSS3DRenderer();
@@ -251,20 +250,26 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
     }
 
     /**
-     * 获取是否启用编辑态
+     * 获取编辑态配置
      */
-    get enableEdit(): boolean {
-        return this.options.enableEdit || false;
+    get edit(): IViewerEdit {
+        return this.options.edit as IViewerEdit;
     }
 
     /**
-     * 设置编辑态是否启用
-     * @param enable
+     * 设置编辑态配置
+     * @param config
      */
-    set enableEdit(enable: boolean) {
-        if (enable === this.enableEdit) return;
+    set edit(config: IViewerEdit) {
+        if(!config)  return;
 
-        if (enable) {
+        if (deepEqual(config,this.options.edit)) return;
+
+        deepAssign(this.options.edit,config);
+
+        if (this.options.edit?.gizmo) {
+            if(this.modules.transformControls) return;
+
             let objectPositionOnDown = new THREE.Vector3();
             let objectRotationOnDown = new THREE.Euler();
             let objectScaleOnDown = new THREE.Vector3();
@@ -327,6 +332,10 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
 
             this.modules.transformControls = undefined;
         }
+
+        // TODO 处理 this.options.edit?.helpers，以兼容只显示gizmo不显示helpers的情况
+
+        this.render();
     }
 
     /**
@@ -492,7 +501,7 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
             tilesManage: new TilesManage(this.scene,this.camera,this.renderer),
         }
 
-        if (this.enableEdit) {
+        if (this.edit?.enabled) {
             let objectPositionOnDown = new THREE.Vector3();
             let objectRotationOnDown = new THREE.Euler();
             let objectScaleOnDown = new THREE.Vector3();
@@ -1091,7 +1100,7 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
 
         // 非默认相机不渲染辅助
         if (this.camera === App.viewportCamera) {
-            if (this.showSceneHelpers) this.renderer.render(this.sceneHelpers, this.camera);
+            if (this.options.edit?.enabled) this.renderer.render(this.sceneHelpers, this.camera);
         }
 
         // css2d 在sceneHelpers内
