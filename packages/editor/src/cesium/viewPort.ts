@@ -176,7 +176,6 @@ export default class ViewPort {
         this._three.transformControls = new TransformControls(this._three.camera, this._three.renderer.domElement);
         let transformControls = this._three.transformControls;
         transformControls.addEventListener('change', () => {
-            transformControls.updateMatrixWorld();
             const object = transformControls.object;
             if (object !== undefined) {
                 this._three.box.setFromObject(object, true);
@@ -232,10 +231,11 @@ export default class ViewPort {
             //controls.enabled = true;
             this.loop()
         });
-        transformControls.traverse(child => {
+        const gizmo = transformControls.getHelper();
+        gizmo.traverse(child => {
             child.userData.isTransformControls = true;
         })
-        this._three.sceneHelpers.add(transformControls);
+        this._three.sceneHelpers.add(gizmo);
 
         //相关方法
         const attachObject = (object) => {

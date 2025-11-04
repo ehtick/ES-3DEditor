@@ -34,6 +34,9 @@ onMounted(async () => {
 
   window.viewer = new Viewer({
     container: viewportRef.value,
+    edit: {
+      enabled: false,
+    },
     grid:{
       enabled:false,
     },

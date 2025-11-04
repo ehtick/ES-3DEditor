@@ -45,7 +45,7 @@
     <!-- 辅助 -->
     <n-form-item :label="t('layout.sider.sceneConfig.Helpers')">
       <n-switch size="small" v-model:value="helpers"
-                @update:value="Hooks.useDispatchSignal('showHelpersChanged',helpers)"/>
+                @update:value="handleShowHelpers"/>
     </n-form-item>
   </n-form>
 </template>
@@ -143,5 +143,15 @@ function onBackgroundChanged() {
 //environment Change Event
 function onEnvironmentChanged() {
   Hooks.useDispatchSignal("sceneEnvironmentChanged", toRaw(environmentSelect.value), toRaw(environmentTexture.value));
+}
+
+function handleShowHelpers(){
+  window.viewer.edit = {
+    enabled: helpers.value,
+    helpers: true,
+    gizmo: true
+  }
+
+  window.viewer.render();
 }
 </script>

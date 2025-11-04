@@ -38,7 +38,9 @@ onMounted(async () => {
 
   window.viewer = new Viewer({
     container: viewportRef.value,
-    enableEdit:true,
+    edit: {
+      enabled: true
+    },
     request: {
       baseUrl:"/file/static/"
     }

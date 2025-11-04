@@ -377,7 +377,7 @@ function handleContextmenuSelect(key: string) {
 onMounted(async () => {
   // 此signal必须在nextTick方法前注册，否则会造成viewer中已分发此处却尚未监听
   Hooks.useAddOnceSignal("viewerInitCompleted",(viewer) => {
-    if(viewer.enableEdit){
+    if(viewer.edit?.enabled){
       contextmenuOptions.push({
         label: t("home.Delete"),
         key: 'delete'
