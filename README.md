@@ -48,10 +48,10 @@
 
 ## 🛠️ 技术栈
 
-![Vue3](https://img.shields.io/badge/Vue-3.3.4-4FC08D?logo=vuedotjs)
-![Three.js](https://img.shields.io/badge/Three.js-r170-000000?logo=threedotjs)
+![Vue3](https://img.shields.io/badge/Vue-3.5.22-4FC08D?logo=vuedotjs)
+![Three.js](https://img.shields.io/badge/Three.js-r176-000000?logo=threedotjs)
 ![Cesium](https://img.shields.io/badge/Cesium-1.107.0-0133B4?logo=cesium)
-![NaiveUI](https://img.shields.io/badge/Naive_UI-2.39.0-66C060?logo=vue.js)
+![NaiveUI](https://img.shields.io/badge/Naive_UI-2.43.1-66C060?logo=vue.js)
 ![UnoCSS](https://img.shields.io/badge/UnoCSS-0.46.5-333333?logo=unocss)
 
 ## ⚡ 快速开始
@@ -96,11 +96,12 @@
 
 ## ⚖️ 许可协议
 
-本项目采用 [![Apache License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) 开源协议，使用时请遵守以下条款：
+本项目采用 [![Apache License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) 开源协议，使用时请遵守协议条款及以下补充条款：
 
-- ✅ 允许：个人学习、二次开发、商业用途
-- ⚠️ 需要版权声明
-- ❌ 禁止：将本项目用于非法用途
+- ✅ 允许：个人学习/二次开发    
+- ⚠️ 需要版权声明    
+- ⚠️ 商业用途需要授权    
+- ❌ 禁止：将本项目用于与**杭州星孪数字科技**有竞争性的业务或非法用途    
 
 **[完整法律声明](LEGAL.md)** | **[贡献指南](CONTRIBUTING.md)**
 

@@ -47,10 +47,10 @@ Get the latest news and technical support in the following ways:
 
 ## 🛠️ Technology stack
 
-![Vue3](https://img.shields.io/badge/Vue-3.3.4-4FC08D?logo=vuedotjs)
-![Three.js](https://img.shields.io/badge/Three.js-r170-000000?logo=threedotjs)
+![Vue3](https://img.shields.io/badge/Vue-3.5.22-4FC08D?logo=vuedotjs)
+![Three.js](https://img.shields.io/badge/Three.js-r176-000000?logo=threedotjs)
 ![Cesium](https://img.shields.io/badge/Cesium-1.107.0-0133B4?logo=cesium)
-![NaiveUI](https://img.shields.io/badge/Naive_UI-2.39.0-66C060?logo=vue.js)
+![NaiveUI](https://img.shields.io/badge/Naive_UI-2.43.1-66C060?logo=vue.js)
 ![UnoCSS](https://img.shields.io/badge/UnoCSS-0.46.5-333333?logo=unocss)
 
 ## ⚡ Quick start
@@ -95,11 +95,12 @@ If this project is helpful to you, please feel free to:
 
 ## ⚖️ License agreement
 
-This project uses the [![Apache License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) open source license, please comply with the following terms:
+This project adopts the [![Apache License] (https://img.shields.io/badge/License-Apache_2.0-blue.svg)] (License) open source licenses, please comply with the terms of the agreement and the following supplementary conditions:
 
-- ✅ Allowed: personal learning, secondary development, commercial use
-- ⚠️ A copyright notice is required.
-- ❌ Do not use this item for any illegal purpose
+- ✅ allows: individual learning/secondary development
+- ⚠️ A copyright notice is required
+- ⚠️ commercial use requires authorization
+- ❌ Prohibited: using this project for business or illegal purposes that are competitive with **hangzhou xingluan digital technology**
 
 **[Full legal notice](LEGAL.md)** | **[Contribution guide](CONTRIBUTING.md)**
 
