@@ -69,9 +69,6 @@ export class Signals {
         this.viewer.modules.controls.setTarget(0, 0, 0,true);
         this.viewer.pathtracer?.reset();
 
-        this.viewer.css2DRenderer.domElement.innerHTML = "";
-        this.viewer.css3DRenderer.domElement.innerHTML = "";
-
         const rendererConfig = App.project.getKey("renderer");
         App.FPS = rendererConfig.fps;
         this.viewer.renderer.shadowMap.enabled = rendererConfig.shadow.enabled;

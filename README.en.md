@@ -56,7 +56,7 @@ Get the latest news and technical support in the following ways:
 ## ⚡ Quick start
 
 ### pre-demand
-- Node.js ≥ 18.x
+- Node.js ≥ 23.11.x
 - Yarn
 
 ### Local run

@@ -216,7 +216,7 @@ class HtmlPanelConverter {
                 if (!option.fileName) {
                     // 解析URL以获取文件名
                     // const _url = new URL(option.url, document.baseURI);
-                    const _url = new URL(option.url, "https://editor.astraljs.com");
+                    const _url = new URL(option.url, import.meta.env.VITE_GLOB_ORIGIN);
 
                     option.fileName = _url.pathname.split('/').pop() || 'index.html';
                 }
@@ -231,8 +231,7 @@ class HtmlPanelConverter {
             }
 
             try{
-                const htmlObject3D = this.parseToCSS3D(htmlPanelOption);
-                resolve(htmlObject3D);
+                resolve(this.parseToCSS3D(htmlPanelOption));
             }catch (e){
                 reject(e);
             }
@@ -461,7 +460,7 @@ class HtmlPanelConverter {
                 if (!originPath) return;
 
                 // 路径标准化处理
-                const resolvedPath = new URL(originPath, `https://editor.astraljs.com/${basePath}/`).pathname.slice(1);
+                const resolvedPath = new URL(originPath, `${import.meta.env.VITE_GLOB_ORIGIN}/${basePath}/`).pathname.slice(1);
 
                 if (filesMap.has(resolvedPath)) {
                     el.setAttribute(attr, filesMap.get(resolvedPath)!);
