@@ -923,11 +923,17 @@ class Loader {
 
 	async createGLTFLoader(manager?:THREE.LoadingManager) {
 		const { MeshoptDecoder } = await import( 'three/examples/jsm/libs/meshopt_decoder.module.js' );
+		const { GLTFAnimationPointerExtension } = await import( '@needle-tools/three-animation-pointer' );
 
 		const loader = new GLTFLoader(manager);
 		loader.setDRACOLoader(this.dracoLoader);
 		loader.setKTX2Loader(this.ktx2Loader);
 		loader.setMeshoptDecoder(MeshoptDecoder);
+
+        // 20251105：添加对带有 KHR_animation_pointer 动画的 glTF 文件的支持
+        loader.register(p => {
+            return new GLTFAnimationPointerExtension(p);
+        });
 
 		return loader;
 	}

@@ -252,6 +252,9 @@ importers:
       '@dxfom/mtext':
         specifier: ^0.3.2
         version: 0.3.2
+      '@needle-tools/three-animation-pointer':
+        specifier: ^1.0.7
+        version: 1.0.7(three@0.176.0)
       camera-controls:
         specifier: ^2.9.0
         version: 2.10.1(three@0.176.0)
@@ -1633,6 +1636,11 @@ packages:
 
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
+
+  '@needle-tools/three-animation-pointer@1.0.7':
+    resolution: {integrity: sha512-lvNeW8+Dy3iqndaIdsswskQl35p4zL7jUOIhmQVsSSrj3CXZMpMvtLlXClf+Qnrf5v09Fyvf8Oe4Qgtp+yRSLQ==}
+    peerDependencies:
+      three: '>=0.165.0'
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4938,6 +4946,7 @@ packages:
   sitemap@8.0.0:
     resolution: {integrity: sha512-+AbdxhM9kJsHtruUF39bwS/B0Fytw6Fr1o4ZAIAEqA6cke2xcoO2GleBw9Zw7nRzILVEgz7zBM5GiTJjie1G9A==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    deprecated: 'SECURITY: Multiple vulnerabilities fixed in 8.0.1 (XML injection, path traversal, command injection, protocol injection). Upgrade immediately: npm install sitemap@8.0.1'
     hasBin: true
 
   slash@5.1.0:
@@ -7337,6 +7346,10 @@ snapshots:
       resolve: 1.22.10
 
   '@microsoft/tsdoc@0.15.1': {}
+
+  '@needle-tools/three-animation-pointer@1.0.7(three@0.176.0)':
+    dependencies:
+      three: 0.176.0
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
