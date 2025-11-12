@@ -15,9 +15,9 @@
   "dependencies": {
     "@ant-design/colors": "^7.0.2",
     "@astral3d/engine": "workspace:^",
-    "@gltf-transform/core": "^4.0.8",
-    "@gltf-transform/extensions": "^4.0.8",
-    "@gltf-transform/functions": "^4.0.8",
+    "@gltf-transform/core": "^4.2.1",
+    "@gltf-transform/extensions": "^4.2.1",
+    "@gltf-transform/functions": "^4.2.1",
     "@vicons/carbon": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vueuse/core": "^13.2.0",

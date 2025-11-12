@@ -1,13 +1,3 @@
-declare interface IAstralEditorWasm {
-    exports:{
-        computedStyle:()=>void
-    }
-}
-declare interface IAstralEngineWasm {
-    exports: {
-    }
-}
-
 declare interface Window {
 	$t:(s: string)=>string;
 	$cpt:(s: string)=>ComputedRef<string>;
@@ -21,9 +11,9 @@ declare interface Window {
     CesiumApp:any;
 	VRButton: any;
     log: import('loglevel').RootLogger;
-    // 在wasm中注册
-    AstralEditorWasm: IAstralEditorWasm;
-    AstralEngineWasm: IAstralEngineWasm;
+    // wasm
+    glTFHandlerEncodeGLB: (u: Uint8Array, jsonStr: string) => Uint8Array
+    glTFHandlerEncodePNG: (png: Uint8Array) => Uint8Array
 }
 
 declare interface Number{

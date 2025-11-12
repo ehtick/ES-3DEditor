@@ -33,6 +33,7 @@ import {
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import {Session} from "./session";
 import {loadScript} from "@/utils/common/utils";
+import { optimizePNG } from "@/plugin/glTFHandler/optimizePng";
 
 //使用'micromatch'，因为'contains: true'没有像预期的那样在minimatch中工作。需要确保'*'匹配的模式，如'image/png'。
 export const MICROMATCH_OPTIONS = { nocase: true, contains: true };
@@ -91,7 +92,6 @@ export default class GLTFHandler implements Plugin{
         }
 
         this.GLTFHandlerComponentRef = ref();
-        const finishFn = this.finish.bind(this);
         this.modalInstance = window.$modal.create({
             title: this.name,
             preset:"card",
@@ -100,12 +100,12 @@ export default class GLTFHandler implements Plugin{
                 width: '90%',
                 maxWidth: '800px'
             },
-            onAfterLeave: finishFn,
+            onAfterLeave: () => this.finish(),
             content: () => {
                 return h(GLTFHandlerComponent,{
-                    onOptimize:this.optimize.bind(this),
-                    onFinish: finishFn,
-                    ref:this.GLTFHandlerComponentRef
+                    onOptimize: this.optimize.bind(this),
+                    onFinish: () => this.finish(),
+                    ref: this.GLTFHandlerComponentRef
                 },"")
             },
         })
@@ -137,7 +137,6 @@ export default class GLTFHandler implements Plugin{
 
     /* 下面是实现的自定义的处理器方法 */
     async optimize(opts:IPlugin.GLTFHandlerOptimizeModel,inputFile:File,outputFileName = ""){
-        // console.log("调用优化处理器，",opts,inputFile)
         this.setLogger(`Optimize ${inputFile.name}`);
 
         if(this.dracoScript.failMsg){
@@ -151,7 +150,10 @@ export default class GLTFHandler implements Plugin{
 
         /* 文件准备就绪，开始优化 */
 
-        const transforms: Transform[] = [dedup()];
+        const transforms: Transform[] = [
+            optimizePNG(),
+            dedup()
+        ];
 
         if (opts.instance) transforms.push(instance({ min: opts.instanceMin }));
 
