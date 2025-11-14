@@ -216,7 +216,7 @@ onMounted(() => {
             <n-divider vertical class="!h-auto"/>
 
             <div class="h-full w-320px flex flex-col justify-start ml-10px">
-              <img :src="currentExample?.coverPicture || '/static/images/carousel/Astral3DEditor.jpg'" class="w-full">
+              <img :src="getServiceStaticFile(currentExample?.coverPicture || '') || '/static/images/carousel/Astral3DEditor.jpg'" class="w-full">
 
               <h3 class="mt-10px mb-8px">{{ currentExample?.sceneName || t("home.Empty project") }}</h3>
               <p class="h-100px overflow-y-auto">
