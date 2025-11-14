@@ -39,6 +39,8 @@ class Measure extends THREE.EventDispatcher<MeasureEventMap>{
         depthWrite: false,
         depthTest: false
     });
+    // 标记点图片
+    static MARKER_TEXTURE = new URL(import.meta.env.BASE_URL + 'static/images/logo.png', import.meta.url).href;
     static MAX_DISTANCE = 500; //当相交物体的距离太远时，忽略它
     static OBJ_NAME = "object_for_measure";
     static LABEL_NAME = "label_for_measure";
@@ -69,12 +71,13 @@ class Measure extends THREE.EventDispatcher<MeasureEventMap>{
         super();
 
         this.mode = mode;
-        this.scene = viewer.sceneHelpers;
+        this.scene = viewer.scene;
         this.viewer = viewer;
 
         // 初始化group
         this.measureGroup = new THREE.Group();
         this.measureGroup.name = `measure_group`;
+        this.measureGroup.ignore = true;
 
         this.group = new THREE.Group();
 
@@ -239,7 +242,7 @@ class Measure extends THREE.EventDispatcher<MeasureEventMap>{
      * 初始化点标记材料
      */
     initPointMarkerMaterial() {
-        const markerTexture = new THREE.TextureLoader().load("/static/images/logo/logo.png");
+        const markerTexture = new THREE.TextureLoader().load(Measure.MARKER_TEXTURE);
         this.spriteMaterial = new THREE.SpriteMaterial({
             map: markerTexture,
             depthTest: false,  // 深度测试

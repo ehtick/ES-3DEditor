@@ -1103,9 +1103,7 @@ export default class Viewer extends THREE.EventDispatcher<ViewerEventMap> {
             if (this.options.edit?.enabled) this.renderer.render(this.sceneHelpers, this.camera);
         }
 
-        // css2d 在sceneHelpers内
-        this.css2DRenderer.render(this.sceneHelpers, App.viewportCamera);
-
+        this.css2DRenderer.render(this.scene, App.viewportCamera);
         this.css3DRenderer.render(this.scene, App.viewportCamera);
 
         this.modules.viewHelper.render();
