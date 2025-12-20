@@ -18,12 +18,13 @@
 import {onMounted, ref, nextTick, onBeforeUnmount} from 'vue';
 import {App,Viewer,Hooks} from "@astral3d/engine";
 import Toolbar from "./Toolbar.vue";
-import ViewportInfo from "./ViewportInfo.vue";
-import BIMProperties from "./BIMProperties.vue";
-import IFCProperties from "./IFCProperties.vue";
 import {useGlobalConfigStore} from "@/store/modules/globalConfig";
 import {usePluginStore} from "@/store/modules/plugin";
 import {installBuiltinPlugin} from "@/plugin";
+import { clearBuffer } from "@/utils/wasm/optimize";
+import ViewportInfo from "./ViewportInfo.vue";
+import BIMProperties from "./BIMProperties.vue";
+import IFCProperties from "./IFCProperties.vue";
 
 const globalStore = useGlobalConfigStore();
 const pluginStore = usePluginStore();
@@ -55,6 +56,9 @@ onMounted(async () => {
   
   // 注册astral editor内置插件
   installBuiltinPlugin(window.viewer);
+
+  // 清理wasm缓存
+  clearBuffer();
 })
 
 onBeforeUnmount(() => {

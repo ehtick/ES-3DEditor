@@ -12,6 +12,7 @@ declare interface Window {
 	VRButton: any;
     log: import('loglevel').RootLogger;
     // wasm
+    clearBuffer: () => void
     glTFHandlerEncodeGLB: (u: Uint8Array, jsonStr: string) => Uint8Array
     glTFHandlerEncodePNG: (png: Uint8Array) => Uint8Array
 }
