@@ -58,7 +58,7 @@ const filteredList = computed(() => {
 
 //双击添加至场景
 function addToScene(key) {
-  const obj = Astral3D[key];
+  const obj = Astral3D[key]();
 
   Astral3D.App.execute(new Astral3D.AddObjectCommand(obj));
 }
