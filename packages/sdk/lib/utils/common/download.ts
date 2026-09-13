@@ -1,18 +1,21 @@
 /**
- * 下载blob二进制对象
- * @param blob
- * @param filename
+ * 下载 Blob 二进制对象，并在触发下载后释放临时 URL。
+ * @param {Blob} blob 待下载的二进制对象。
+ * @param {string} filename 下载文件名，空值时使用 data.json。
+ * @returns {void} 无返回值。
  */
 export function downloadBlob(blob, filename) {
     const link = document.createElement('a');
 
-    if (link.href) {
-        URL.revokeObjectURL(link.href);
-    }
-
-    link.href = URL.createObjectURL(blob);
     link.download = filename || 'data.json';
-    link.dispatchEvent(new MouseEvent('click'));
+    const blobUrl = URL.createObjectURL(blob);
+    try {
+        link.href = blobUrl;
+        link.dispatchEvent(new MouseEvent('click'));
+    } finally {
+        // 延迟回收，为浏览器启动下载预留时间；触发异常时同样释放本次 URL。
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+    }
 }
 
 /**
