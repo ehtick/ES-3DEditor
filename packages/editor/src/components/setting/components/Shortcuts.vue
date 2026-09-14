@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import {reactive,onMounted} from "vue";
+import {reactive,onMounted,onBeforeUnmount} from "vue";
 import {t} from "@/language";
 import EsTip from "@/components/es/EsTip.vue";
 import {App,RemoveObjectCommand,Hooks,Utils} from "@astral3d/engine";
@@ -58,50 +58,61 @@ function shortcutsKeyup(event:KeyboardEvent, varName:string) {
   App.config.setShortcutItem(varName, event.key.toLowerCase());
 }
 
+/**
+ * 处理当前组件负责的全局快捷键，保留函数引用以便卸载时解除监听
+ * @param event 文档触发的键盘事件
+ * @returns 无返回值
+ */
+function handleShortcutKeydown(event: KeyboardEvent): void {
+  // 如果事件目标是输入框（INPUT 或 TEXTAREA），则直接返回
+  if (event.target && ['INPUT', 'TEXTAREA'].includes((<HTMLElement>event.target).tagName.toUpperCase())) {
+    return;
+  }
+
+  switch (event.key.toLowerCase()) {
+    case 'delete':
+      const object = App.selected;
+      if (object === null) return;
+
+      const parent = object.parent;
+      if (parent !== null) App.execute(new RemoveObjectCommand(object));
+      break;
+    case App.config.getShortcutItem('translate'):
+      Hooks.useDispatchSignal('transformModeChanged', 'translate');
+      break;
+    case App.config.getShortcutItem('rotate'):
+      Hooks.useDispatchSignal('transformModeChanged', 'rotate');
+      break;
+    case App.config.getShortcutItem('scale'):
+      Hooks.useDispatchSignal('transformModeChanged', 'scale');
+      break;
+    case App.config.getShortcutItem('undo'):
+      // windows下：ctrl + App.config.getShortcutItem('shortcuts/undo') 撤销，同时按下shift重做
+      // mac下：meta + App.config.getShortcutItem('shortcuts/undo') 撤销，同时按下shift重做
+      if (Utils.IS_MAC ? event.metaKey : event.ctrlKey) {
+        //阻止特定于浏览器的热键
+        event.preventDefault();
+        if (event.shiftKey) {
+          App.redo();
+        } else {
+          App.undo();
+        }
+      }
+      break;
+    case App.config.getShortcutItem('focus'):
+      if (App.selected !== null) {
+        App.focus(App.selected);
+      }
+      break;
+  }
+}
+
 onMounted(() => {
-  document.addEventListener("keydown", (event) => {
-    // 如果事件目标是输入框（INPUT 或 TEXTAREA），则直接返回
-    if (event.target && ['INPUT', 'TEXTAREA'].includes((<HTMLElement>event.target).tagName.toUpperCase())) {
-      return;
-    }
+  document.addEventListener("keydown", handleShortcutKeydown);
+})
 
-    switch (event.key.toLowerCase()) {
-      case 'delete':
-        const object = App.selected;
-        if (object === null) return;
-
-        const parent = object.parent;
-        if (parent !== null) App.execute(new RemoveObjectCommand(object));
-        break;
-      case App.config.getShortcutItem('translate'):
-        Hooks.useDispatchSignal('transformModeChanged', 'translate');
-        break;
-      case App.config.getShortcutItem('rotate'):
-        Hooks.useDispatchSignal('transformModeChanged', 'rotate');
-        break;
-      case App.config.getShortcutItem('scale'):
-        Hooks.useDispatchSignal('transformModeChanged', 'scale');
-        break;
-      case App.config.getShortcutItem('undo'):
-        // windows下：ctrl + App.config.getShortcutItem('shortcuts/undo') 撤销，同时按下shift重做
-        // mac下：meta + App.config.getShortcutItem('shortcuts/undo') 撤销，同时按下shift重做
-        if (Utils.IS_MAC ? event.metaKey : event.ctrlKey) {
-          //阻止特定于浏览器的热键
-          event.preventDefault();
-          if (event.shiftKey) {
-            App.redo();
-          } else {
-            App.undo();
-          }
-        }
-        break;
-      case App.config.getShortcutItem('focus'):
-        if (App.selected !== null) {
-          App.focus(App.selected);
-        }
-        break;
-    }
-  })
+onBeforeUnmount(() => {
+  document.removeEventListener("keydown", handleShortcutKeydown);
 })
 </script>
 
