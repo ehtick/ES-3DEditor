@@ -152,7 +152,7 @@ function onMapChange(texture) {
   if (texture !== null) {
     // 修正色彩空间
     if (colorMaps.includes(props.property) && !texture.isDataTexture && texture.colorSpace !== THREE.SRGBColorSpace) {
-      texture.encoding = THREE.SRGBColorSpace;
+      texture.colorSpace = THREE.SRGBColorSpace;
       material.needsUpdate = true;
     }
   }
