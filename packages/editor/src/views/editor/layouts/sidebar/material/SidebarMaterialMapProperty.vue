@@ -105,20 +105,20 @@ async function update() {
     enabled.value = material[props.property] !== null;
     enabledDisabled.value = toRaw(texture.value) === null;
 
-    if (intensity.value !== undefined) {
+    if (material[`${props.property}Intensity`] !== undefined) {
       intensity.value = material[`${props.property}Intensity`];
     }
 
-    if (scale.value !== undefined) {
+    if (typeof material[`${mapType}Scale`] === 'number') {
       scale.value = material[`${mapType}Scale`];
     }
 
-    if (scaleX.value !== undefined) {
+    if (material[`${mapType}Scale`]?.x !== undefined) {
       scaleX.value = material[`${mapType}Scale`]?.x;
       scaleY.value = material[`${mapType}Scale`]?.y;
     }
 
-    if (rangeMin.value !== undefined) {
+    if (material[`${mapType}Range`]?.[0] !== undefined) {
       rangeMin.value = material[`${mapType}Range`][0];
       rangeMax.value = material[`${mapType}Range`][1];
     }
