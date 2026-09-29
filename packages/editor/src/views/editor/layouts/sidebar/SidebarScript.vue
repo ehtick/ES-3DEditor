@@ -4,8 +4,8 @@
   <div v-if="isSelectObject3D">
     <n-list hoverable clickable>
       <n-list-item v-for="(script, index) in scripts" :key="index">
-        <EsInput size="small" defaultNoBorder v-model:value="script.name"
-                 @change="(n) => handleNameChange(script, n)"/>
+        <EsInput size="small" defaultNoBorder :value="script.name"
+                 @update:value="(n) => handleNameChange(script, n)"/>
         <n-button size="small" class="ml-5px" @click="handleEdit(script)">
           {{ t('layout.sider.script.Edit') }}
         </n-button>
