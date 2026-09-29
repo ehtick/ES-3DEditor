@@ -107,7 +107,12 @@ function handleNew() {
 }
 
 function handleNameChange(script: IScript.IStruct, name: string) {
-  if(!App.selected) return;
+  if(!App.selected || script.name === name) return;
+
+  if (App.scripts[App.selected.uuid]?.some((item) => item.name === name)) {
+    window.$message?.error(t("layout.sider.script['The script name already exists']"));
+    return;
+  }
 
   App.execute(new SetScriptValueCommand(App.selected, script, 'name', name));
 }
