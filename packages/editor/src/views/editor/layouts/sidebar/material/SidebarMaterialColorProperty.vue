@@ -65,7 +65,7 @@ function onChange() {
     App.execute(new SetMaterialColorCommand(object, props.property, newColor, currentMaterialSlot));
   }
 
-  if (intensity !== undefined) {
+  if (material[`${props.property}Intensity`] !== undefined) {
     if (material[`${props.property}Intensity`] !== intensity.value) {
       App.execute(new SetMaterialValueCommand(object, `${props.property}Intensity`, intensity.value, currentMaterialSlot));
     }
